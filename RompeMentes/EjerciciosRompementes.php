@@ -86,16 +86,12 @@ function ComprobarCorchetes($str){
      
       if($comp == "("){
           $contA++;
-          
       }elseif ($comp == ")") {
           $contC++;
       }
-      
       if($contA < $contC){
-          break;
+          return 0;
       }
-      
-      
   }
   
   if($contA == $contC){
@@ -106,7 +102,6 @@ function ComprobarCorchetes($str){
   }
         
 }
-
 
 echo ComprobarCorchetes($str2);
 ?>
@@ -128,17 +123,16 @@ echo ComprobarCorchetes($str2);
  * 
  */
 
- $str = "arrb6???4xxbl5???eee5";
+ $str1 = "arrb6???4xxbl5???eee5";
 
 
-function CuestionDeInterrogaciones($str) {
-  // El código empieza aquí
-
+function CuestionDeInterrogaciones($str1) {
+    
+    
 
 }
    
 
 echo CuestionDeInterrogaciones($str);  
 
-?>
 
