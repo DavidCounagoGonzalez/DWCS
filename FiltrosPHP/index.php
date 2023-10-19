@@ -47,9 +47,11 @@ va a tener este formato: $IP = "127.0.0.1"
 
 */
 
-$ip = "12734234.6.0.1";
+$ip = "127.6.0.1";
+//Filtramos por tipo ip
 $ipVal = filter_var($ip, FILTER_VALIDATE_IP);
-if($ipVal === 0 || $ipVal){
+//Si devuelve true es válida
+if($ipVal){
     echo "La ip es válida";
 }else{
     echo "La ip NO es válida";
@@ -72,10 +74,14 @@ Si un correo no es valido, muestralo por pantalla. al final, señala la cantidad
 
 */
 
-$abreFich = fopen("correos.txt", 'r');
+$abreFich = fopen("correos.txt", 'r');//Abrimos archivo en lectura
+//Mientras se pueda leer
 while($correo = fgets($abreFich)){
+    //Si hay otra línea
     if(!feof($abreFich)){
+        //saneamos el correo recogido
         $correoSan = filter_var($correo, FILTER_SANITIZE_EMAIL);
+        //Filtramos con el filtro de tipo correo
         if(filter_var($correoSan, FILTER_VALIDATE_EMAIL)){
             echo "El correo: " . $correo . "  es válido <br/>";
         }else{
@@ -101,6 +107,7 @@ $int = 33;
 $min = 30;
 $max = 60;
 
+//Filtramos el valor int pasando por opciones de filtro el menor  mayor
 if(filter_var($int, FILTER_VALIDATE_INT, array("options" => array("min_range" => $min,
     "max_range"=>$max))) === false){
     echo "La variable está fuera del rango.";
@@ -124,6 +131,7 @@ y realiza un echo de la cadena de caracteres nueva.
 */
 
 $cadeña = "Mañana te devuelvo el paño, que hoy voy a por estaño";
+//Filtramos la cadena con la opción de eliminar caracteres especiales
 $cadena = filter_var($cadeña, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
 echo $cadena;
 
@@ -137,10 +145,12 @@ en el ejercicio 2, si los datos de cada fila son validos.
 
 */
 
-$abreFichIP = fopen("DireccionesIPv6.txt", 'r');
+$abreFichIP = fopen("DireccionesIPv6.txt", 'r');//Abrimos en modo lectura
+//Mientras se puedan leer líneas en el fichero
 while($ipFich = fgets($abreFichIP)){
-    
+    //Si hay una siguiente 
     if(!feof($abreFichIP)){
+        //validamos las ips con la opcion de que sea ipv6
         if(filter_var(trim($ipFich), FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)){
             
             echo "La IPv6: " . $ipFich . "  es válida <br/>";
@@ -171,8 +181,10 @@ Modifica el ejercicio 1 para enviar por formulario una URL y comprobar con un fi
 Ten en cuenta que filter_var() tiene opciones para filtrar URLs llamadas FILTER_VALIDATE_URL y FILTER_SANITIZE_URL
 */
 
-if(isset($_POST['submit'])){
+if(isset($_POST['submit'])){//Pulsación del botón submit
+    //Saneamos el valor del input
    $enlaceSan = filter_var($_POST['enlace'], FILTER_SANITIZE_URL);
+   //filtramos el enlace saneado si es válido se va a esa página
    if(filter_var($enlaceSan, FILTER_VALIDATE_URL)){
        header('location:' . $enlaceSan);
    }else{
