@@ -63,7 +63,8 @@ foreach ($asociativo as $key => $value) {
 echo "<br><br>";
 
 
-echo "<b>decodificando un archivo json:</b><br>";
+echo "<b>Decodificando un archivo json:</b><br>"
+. "<a href='jsonTest.json'>Contenido del archivo</a><br><br>";
 $json = file_get_contents('jsonTest.json'); 
   
 $jsonIterator = new RecursiveIteratorIterator(
@@ -78,3 +79,28 @@ foreach ($jsonIterator as $key => $val) {
     }
 
 }
+
+echo "<br><br>";
+echo "<b>Arrays a JSON: </b><br>";
+
+$datos = array(
+    'Juan' => array(
+        'id'=>1,
+        'edad'=>23,
+        'curso'=>'DAM'
+    ),
+    'María' => array(
+        'id'=>2,
+        'edad'=>28,
+        'curso'=>'ASIR'
+    ),
+    'Manuel' => array(
+        'id'=>3,
+        'edad'=>19,
+        'curso'=>'DAW'
+    )
+);
+
+$fichero = fopen('arrayTest.json', 'w+');
+fwrite($fichero, json_encode($datos));
+echo "<a href='arrayTest.json'>Ir al fichero</a> ";
