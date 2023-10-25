@@ -1,0 +1,73 @@
+{
+"peliculas":[
+        {
+        "nombre":"Django Desencadenado",
+        "datos":[
+        {
+            "nota":8.7,
+            "director":"Quentin Tarantino",
+            "a\u00f1o":"2012",
+            "actores":[
+            {
+               "nombre":"Jamie Foxx",
+               "nacimiento":"13 de Diciembre de 1967"         
+            },
+            {
+                "nombre":"Christoph Waltz",
+                "nacimiento":"4 de Octubre de 1956"
+            },
+            {
+                "nombre":"Samuel L. Jackson",
+                "nacimiento":"21 de Diciembre de 1948"
+            }
+            ]
+        }
+        ]},
+        {
+        "nombre":"Spider-Man : Across the Spider-Verse",
+        "datos":[
+        {
+            "nota":9.4,
+            "director":"Joaquim Dos Santos, Justin Thompson & Kemp Powers",
+            "a\u00f1o":"2023",
+            "actores":[
+            {
+               "nombre":"Oscar Isaac",
+               "nacimiento":"9 de Marzo de 1979"         
+            },
+            {
+                "nombre":"Hailee Steinfeld",
+                "nacimiento":"11 de Diciembre de 1996"
+            },
+            {
+                "nombre":"Shameik Moore",
+                "nacimiento":"4 de Mayo de 1995"
+            }
+            ]
+        }
+        ]},   
+        {
+        "nombre":"Kung Fury",
+        "datos":[
+        {
+            "nota":7.9,
+            "director":"David Sandberg",
+            "a\u00f1o":"2015",
+            "actores":[
+            {
+               "nombre":"David Sandberg",
+               "nacimiento":"23 de Diciembre de 1985"         
+            },
+            {
+                "nombre":"Leopold Nilson",
+                "nacimiento":"nd"
+            },
+            {
+                "nombre":"Eleni Young",
+                "nacimiento":"nd"
+            }
+            ]
+        }]
+        }
+]
+}
