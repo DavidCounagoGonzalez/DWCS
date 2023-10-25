@@ -84,23 +84,27 @@ echo "<br><br>";
 echo "<b>Arrays a JSON: </b><br>";
 
 $datos = array(
-    'Juan' => array(
+    'Django Desencadenado' => array(
         'id'=>1,
-        'edad'=>23,
-        'curso'=>'DAM'
+        'nota'=>8.7,
+        'director'=>'Quentin Tarantino',
+        'año'=>'2012'
     ),
-    'María' => array(
+    'Spider-Man : Across the Spider-Verse' => array(
         'id'=>2,
-        'edad'=>28,
-        'curso'=>'ASIR'
+        'nota'=>9.4,
+        'director'=>'Joaquim Dos Santos, Justin Thompson & Kemp Powers',
+        'año'=>'2023'
     ),
-    'Manuel' => array(
+    'Kung Fury' => array(
         'id'=>3,
-        'edad'=>19,
-        'curso'=>'DAW'
+        'nota'=>7.9,
+        'director'=>'David Sandberg',
+        'año'=>'2015'
     )
 );
 
-$fichero = fopen('arrayTest.json', 'w+');
+$fichero = fopen('Peliculas.json', 'w+');
 fwrite($fichero, json_encode($datos));
-echo "<a href='arrayTest.json'>Ir al fichero</a> ";
+echo "<a href='Peliculas.json'>Ir al fichero</a> ";
+fclose($fichero);
