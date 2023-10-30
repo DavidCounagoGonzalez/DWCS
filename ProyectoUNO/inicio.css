@@ -1,0 +1,59 @@
+body{
+    background-color: cadetblue;
+}
+
+h1{
+    position: absolute;
+    top: 10%;
+    left: 40%;
+
+}
+
+#f01{
+    position: absolute;
+    height: 300px;
+    width: 500px;
+    top: 40%;
+    left: 50%;
+    transform: translate(-49%, -49%);
+    box-sizing: border-box;
+    background-color:darkkhaki;
+    text-align: center;
+    border: 4px solid black;
+}
+
+#botones{
+    width: 300px;
+    margin-top: 10%;
+    margin-left: 17%;
+}
+
+.numPJ{
+    width: 250px;
+    margin: 50px;
+    vertical-align: center;
+    text-align: center;
+}
+
+input, label{
+    text-align: left;
+    display: block;
+}
+
+label{
+    margin: 5%;
+}
+
+#nombres{
+    width: 300px;
+    margin-top: -52%;
+    margin-left: 15%;
+    visibility: hidden;
+}
+
+#comenzar{
+    width: 100px;
+    height: 50px;
+    margin-top: -50%;
+    margin-left: 90%;
+}
