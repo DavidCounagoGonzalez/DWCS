@@ -24,7 +24,8 @@
             <input id="j3" class="nombrePJ">
             <label for="j1">Jugador 4:</label>
             <input id="j4" class="nombrePJ">
-            <input type='button' id='comenzar' value='Comenzar'>
+            <input type='submit' name="submit" id='comenzar' value='Comenzar'>
+            <input type="button" class="atras" id='atras' onclick='oculta2()' value='Atras'>
         </div>
     </form>
     
@@ -33,7 +34,23 @@
             document.getElementById("botones").style.visibility = "hidden";
             document.getElementById("nombres").style.visibility = "visible";
         }
+        function oculta2(){
+            document.getElementById("botones").style.visibility = "visible";
+            document.getElementById("nombres").style.visibility = "hidden";
+        }
     </script>
+    
+    <?php
+    if(isset($_POST['submit'])){
+        $jugadores = array();
+        array_push($jugadores, $_POST['j1']);
+        array_push($jugadores, $_POST['j2']);
+        array_push($jugadores, $_POST['j3']);
+        array_push($jugadores, $_POST['j4']);
+        
+        header('location:mainJugar.php?jugadores='.$jugadores);
+     }
+    ?>
 </body>
 </html>
 
