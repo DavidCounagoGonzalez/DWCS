@@ -11,6 +11,33 @@
 
     <?php
     session_start();
+    class Jugador{
+    public $nombre;
+    public $mano = array();
+    
+    public function __construct($nombre, $mano) {
+        $this->nombre = $nombre;
+        $this->mano = $mano;
+    }
+
+    public function getNombre() {
+        return $this->nombre;
+    }
+
+    public function getMano() {
+        return $this->mano;
+    }
+
+    public function setNombre($nombre): void {
+        $this->nombre = $nombre;
+    }
+
+    public function setMano($mano): void {
+        $this->mano = $mano;
+    }
+    
+    }
+    
     $jugadores = $_SESSION['jugadores'];
     
     $json = file_get_contents("Baraja.json");
@@ -18,12 +45,20 @@
     $decoded_json = json_decode($json, true);
     
     $cartas = $decoded_json;
+    
+    shuffle($cartas);
+    
+    $mano = array();
   
     for($i=0; $i<count($jugadores);$i++){
-        echo "<br>" . $jugadores[$i];
-        echo implode(",", $cartas[$i]);
-    }
+        for($c=0; $c<7;$c++){
 
+            array_push($mano, $cartas[$c]);
+        }
+        ${'jugador' . ($i+1)} = new Jugador($jugadores[$i], $mano);
+    }
+    
+    echo $jugador1->getNombre();
     ?>
 </body>
 </html>
