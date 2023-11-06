@@ -53,12 +53,25 @@
     for($i=0; $i<count($jugadores);$i++){
         for($c=0; $c<7;$c++){
 
-            array_push($mano, $cartas[$c]);
+            array_push($mano, array_pop($cartas));
         }
         ${'jugador' . ($i+1)} = new Jugador($jugadores[$i], $mano);
+        ${'mano' . ($i+1)} = $mano;
+        $mano = [];
+        
     }
     
-    echo $jugador1->getNombre();
+    echo $jugador1->getNombre() . "<br>";
+    echo implode(",", $mano1[0]) . '<br>';
+    echo "<br>" . $jugador2->getNombre() . "<br>";
+    echo implode(",", $mano2[0]) . '<br>';
+    echo "<br>" . $jugador3->getNombre() . "<br>";
+    echo implode(",", $mano3[0]) . '<br>';
+    echo "<br>" . $jugador4->getNombre() . "<br>";
+    echo implode(",", $mano4[0]) . '<br>';
+    
+    echo "<br><br>" . count($cartas);
+
     ?>
 </body>
 </html>
