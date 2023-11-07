@@ -5,13 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UNO</title>
-<!--    <link rel="stylesheet" href="inicio.css">-->
     
     <script>
+        //Función que oculta elementos del html al seleccionar numero de Jugadores 
         function oculta(){
             document.getElementById("botones").style.visibility = "hidden";
             document.getElementById("nombres").style.visibility = "visible";
         }
+        //Función que oculta elementos con el botón atrás
         function oculta2(){
             document.getElementById("botones").style.visibility = "visible";
             document.getElementById("nombres").style.visibility = "hidden";
@@ -29,15 +30,16 @@
         </div>
  
     <?php
-    
+    //Variable para el número de jugadores
     $numeroJug = 0;
     
+    //Lanzador de la función oculta en js
     function script(){
         echo "<script>";
         echo "oculta();";
         echo "</script>";
     }
-    
+    //Función que crea el formulario de nombres de jugadores que varía según lo indicado por el usuario.
     function creaForm($numJug){
         echo '<div id="nombres">';
         for($i=0; $i<$numJug; $i++){
@@ -53,6 +55,7 @@
         echo '</form>';
     }
     
+    //Tres ifs que varían según el botón de jugadores pulsado y lanzan la funcion script y crearForm con parámetro= número de Jugadores.
     if(isset($_POST['2'])){
         session_start();
         script();
@@ -77,20 +80,21 @@
         creaForm(4);
     }
 
+    //If que resuelve la pulsación del botón comenzar.
     if(isset($_POST['submit'])){
         session_start();
         $jugadores = array();
-        
+        //Guarda los nombres de los jugadores recogiendo su valor por post preguntando a las etiquetas equivalantes
         for($h=0; $h<$_SESSION['numJug']; $h++){
-        array_push($jugadores, $_POST[('j' . $h)]);
+        array_push($jugadores, $_POST[('j' . ($h+1))]);
         }
-
+        //Si el input está vacío manda como nombre por defecto Jugador i
         for($i=0; $i<count($jugadores); $i++){
             if($jugadores[$i] == ""){
                 $jugadores[$i] = "Jugador " . ($i+1);
             }
         }
-        
+        //Guardamos en un session el nombre de los jugadores
         $_SESSION['jugadores'] = $jugadores;
         
         header('location:mainJugar.php');
