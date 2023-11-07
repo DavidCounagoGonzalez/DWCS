@@ -21,8 +21,10 @@
                     
                     while($repNeg < 8){
                         $aux = array();
-                        array_push($aux, "color =>  $colores[$i]");
-                        array_push($aux, "valor => $accion[$j]");
+                        $aux = [
+                            "color" => $colores[$i],
+                            "valor" => $accion[$j]
+                        ];
                         array_push($baraja, $aux);
                     $repNeg++;
                     }
@@ -33,9 +35,10 @@
                     
                     while($repColor < 2){
                         $aux = array();
-                        
-                        array_push($aux, "color => $colores[$i]");
-                        array_push($aux, "valor => $valor[$h]");
+                        $aux = [
+                            "color" => $colores[$i],
+                            "valor" => $valor[$h]
+                        ];
                         array_push($baraja, $aux);
                         $repColor++;
                     }
