@@ -48,33 +48,43 @@
         }
         echo '<input type="submit" name="submit" id="comenzar" value="Comenzar">
             <input type="button" class="atras" id="atras" onclick="oculta2()" value="Atras">';
+        echo '<p> j'. $numJug .'</p>';
         echo '</div>';
         echo '</form>';
     }
     
     if(isset($_POST['2'])){
+        session_start();
         script();
-        creaForm(2);
         $numeroJug = 2;
+        $_SESSION['numJug']= $numeroJug;
+        creaForm(2);
     }
     
     if(isset($_POST['3'])){
+        session_start();
         script();
-        creaForm(3);
         $numeroJug = 3;
+        $_SESSION['numJug']= $numeroJug;
+        creaForm(3);
     }
     
     if(isset($_POST['4'])){
+        session_start();
         script();
-        creaForm(4);
         $numeroJug = 4;
+        $_SESSION['numJug']= $numeroJug;
+        creaForm(4);
     }
 
     if(isset($_POST['submit'])){
         session_start();
         $jugadores = array();
-        array_push($jugadores, $_POST['j1']);
         
+        for($h=0; $h<$_SESSION['numJug']; $h++){
+        array_push($jugadores, $_POST[('j' . $h)]);
+        }
+
         for($i=0; $i<count($jugadores); $i++){
             if($jugadores[$i] == ""){
                 $jugadores[$i] = "Jugador " . ($i+1);
