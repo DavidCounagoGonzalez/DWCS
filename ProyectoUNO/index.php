@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UNO</title>
+    <link rel="shortcut icon" href="#">
     
     <script>
         //Función que oculta elementos del html al seleccionar numero de Jugadores 

@@ -5,39 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jugar UNO</title>
+    <link rel="shortcut icon" href="#">
 </head>
 <body>
-    
-
+    <form id="fJugar" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET">
     <?php
     session_start();
-    //Creamos clase jugador con nombre y mano de cartas
-    class Jugador{
-    public $nombre;
-    public $mano = array();
-    
-    public function __construct($nombre, $mano) {
-        $this->nombre = $nombre;
-        $this->mano = $mano;
-    }
-
-    public function getNombre() {
-        return $this->nombre;
-    }
-
-    public function getMano() {
-        return $this->mano;
-    }
-
-    public function setNombre($nombre): void {
-        $this->nombre = $nombre;
-    }
-
-    public function setMano($mano): void {
-        $this->mano = $mano;
-    }
-    
-    }
+    //Llamamos a la clase jugador con nombre y mano de cartas
+    require_once('Jugador.php');
     //Guardamos en un array los nombres de los jugadores recogidos en el session
     $jugadores = $_SESSION['jugadores'];
     
@@ -65,15 +40,15 @@
         //creamos una variable para cada jugador le damos su nombre y su mano.
         ${'jugador' . ($i+1)} = new Jugador($jugadores[$i], $mano);
 
-        echo "<br>" . (${'jugador' . ($i+1)})->getNombre() . "<br>";
-        //Imprimimos la mano del jugador 
-        foreach($mano as $key => $value){
-            echo $value["color"] . "/" . $value["valor"] . " , ";
-        }
+//        echo "<br>" . (${'jugador' . ($i+1)})->getNombre() . "<br>";
+//        //Imprimimos la mano del jugador 
+//        foreach((${'jugador' . ($i+1)})->getMano() as $key => $value){
+//            echo $value["color"] . "/" . $value["valor"] . " , ";
+//        }
         $mano = [];
-        echo "<br>";
+//        echo "<br>";
     }
-    echo "<br><br>";
+//    echo "<br><br>";
 
     $primera;
     //Mientras la carta que saque sea negra se barajan hasta sacar una válida.
@@ -85,12 +60,31 @@
     //sacamos la carta con la que inciamos de la baraja
     array_pop($cartas);
 
-    echo "Mesa :" . $primera["color"] . " " . $primera["valor"];
+    $mesa = "<p id='mesa'>Mesa :" . $primera["color"] . " " . $primera["valor"] . "</p>";
+    
+    $ganador=0;
+    $jugando=1;
+    $_SESSION['jugando'] = $jugando;
+    
+    if(isset($_GET["jugarCarta"])){
+       echo "<br>" . (${'jugador' . $_SESSION['jugando']})->getNombre() . "<br>";
+       echo "<select id='jugar'>";
+       foreach((${'jugador' . $jugando})->getMano() as $key => $value){
+            echo "<option value='". $value["color"] . "/" . $value["valor"] . "'>" . $value["color"] . "/" . $value["valor"] . "</option> ";
+        }
+        echo"</select>";
+        
+        $_SESSION['jugando']++;
+        if($jugando==3){
+        $ganador=1;
+        }
+    }
 
-    echo "<br><br> Quedan: " . count($cartas) . " cartas";
+    echo "<input type='submit' name='jugarCarta' value='Jugar'/>";
+    echo $mesa;
 
+    echo "<p id='moton'> Quedan: " . count($cartas) . " cartas</p>";
     ?>
+    </form>
 </body>
 </html>
-
-<!--  -->
