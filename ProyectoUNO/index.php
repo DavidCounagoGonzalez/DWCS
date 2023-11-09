@@ -51,7 +51,6 @@
         }
         echo '<input type="submit" name="submit" id="comenzar" value="Comenzar">
             <input type="button" class="atras" id="atras" onclick="oculta2()" value="Atras">';
-        echo '<p> j'. $numJug .'</p>';
         echo '</div>';
         echo '</form>';
     }
@@ -97,6 +96,8 @@
         }
         //Guardamos en un session el nombre de los jugadores
         $_SESSION['jugadores'] = $jugadores;
+        $_SESSION['jugando'] = 0;
+        $_SESSION['nuevo'] = true;
         
         header('location:mainJugar.php');
      }

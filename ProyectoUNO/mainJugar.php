@@ -30,24 +30,31 @@
     
     //array auxiliar para recoger la mano de cada jugador.
     $mano = array();
-  
-    for($i=0; $i<$numeroJug;$i++){
-        //For que quita 7 cartas del array cartas y las manda a la mano.
-        for($c=0; $c<7;$c++){
+    if($_SESSION['nuevo']==true){
+        for($i=0; $i<$numeroJug;$i++){
+            //For que quita 7 cartas del array cartas y las manda a la mano.
 
-            array_push($mano, array_pop($cartas));
+                for($c=0; $c<7;$c++){
+
+                    array_push($mano, array_pop($cartas));
+                }
+            //creamos una variable para cada jugador le damos su nombre y su mano.
+            ${'jugador' . ($i+1)} = new Jugador($jugadores[$i], $mano);
+            $_SESSION['jugador'.($i+1)] = (${'jugador' . ($i+1)})->getNombre();
+            $_SESSION['mano'.($i+1)] = (${'jugador' . ($i+1)})->getMano();
+
+            //print_r($_SESSION['jugador1']->getMano());
+
+    //        echo "<br>" . (${'jugador' . ($i+1)})->getNombre() . "<br>";
+    //        //Imprimimos la mano del jugador 
+    //        foreach((${'jugador' . ($i+1)})->getMano() as $key => $value){
+    //            echo $value["color"] . "/" . $value["valor"] . " , ";
+    //        }
+            $mano = [];
+    //        echo "<br>";
         }
-        //creamos una variable para cada jugador le damos su nombre y su mano.
-        ${'jugador' . ($i+1)} = new Jugador($jugadores[$i], $mano);
-
-//        echo "<br>" . (${'jugador' . ($i+1)})->getNombre() . "<br>";
-//        //Imprimimos la mano del jugador 
-//        foreach((${'jugador' . ($i+1)})->getMano() as $key => $value){
-//            echo $value["color"] . "/" . $value["valor"] . " , ";
-//        }
-        $mano = [];
-//        echo "<br>";
     }
+    $_SESSION['nuevo'] = false;
 //    echo "<br><br>";
 
     $primera;
@@ -63,21 +70,21 @@
     $mesa = "<p id='mesa'>Mesa :" . $primera["color"] . " " . $primera["valor"] . "</p>";
     
     $ganador=0;
-    $jugando=1;
-    $_SESSION['jugando'] = $jugando;
+    
     
     if(isset($_GET["jugarCarta"])){
-       echo "<br>" . (${'jugador' . $_SESSION['jugando']})->getNombre() . "<br>";
+       $_SESSION['jugando']++;
+       
+       if($_SESSION['jugando']>$numeroJug){
+        $_SESSION['jugando'] = 1;
+        }
+       
+       echo "<br>" . $_SESSION['jugador' . $_SESSION['jugando']] . "<br>";
        echo "<select id='jugar'>";
-       foreach((${'jugador' . $jugando})->getMano() as $key => $value){
+       foreach($_SESSION['mano' . $_SESSION['jugando']] as $key => $value){
             echo "<option value='". $value["color"] . "/" . $value["valor"] . "'>" . $value["color"] . "/" . $value["valor"] . "</option> ";
         }
         echo"</select>";
-        
-        $_SESSION['jugando']++;
-        if($jugando==3){
-        $ganador=1;
-        }
     }
 
     echo "<input type='submit' name='jugarCarta' value='Jugar'/>";
