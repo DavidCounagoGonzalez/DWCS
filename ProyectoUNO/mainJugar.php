@@ -86,6 +86,15 @@
         if($_SESSION['comienzo']==false){
             $cartaJuega = $_GET['manoJug'];
             $mesa = "<p id='mesa'>Mesa :" . $cartaJuega . "</p>";
+            
+            foreach($_SESSION['mano' . ($_SESSION['jugando'])] as $key => $value){
+                $compara = $value["color"] . "/" . $value["valor"];
+                echo $compara;
+                echo "<br>" . $cartaJuega;
+                if($compara === $cartaJuega){
+                    
+                }
+            }
         }
         $_SESSION['comienzo'] = false;
     }
