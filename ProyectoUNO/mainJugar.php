@@ -25,8 +25,8 @@
     
     $cartas = $decoded_json;
     $primera;
-    
-    
+    $comienzo;
+
     //array auxiliar para recoger la mano de cada jugador.
     $mano = array();
     if($_SESSION['nuevo']==true){
@@ -58,6 +58,7 @@
                 $_SESSION['primera'] = ($_SESSION['baraja'])[count($_SESSION['baraja'])-1];
             }while(($_SESSION['primera'])["color"] == "negro");
             array_pop($_SESSION['baraja']);
+            $_SESSION['comienzo'] = true;
         }
         
     }
@@ -77,38 +78,36 @@
         }
        
        echo "<br>" . $_SESSION['jugador' . $_SESSION['jugando']] . "<br>";
-       echo "<select id='jugar'>";
+       echo "<select name='manoJug'>";
        foreach($_SESSION['mano' . $_SESSION['jugando']] as $key => $value){
             echo "<option value='". $value["color"] . "/" . $value["valor"] . "'>" . $value["color"] . "/" . $value["valor"] . "</option> ";
         }
         echo"</select>";
-        $mesa = "<p id='mesa'>Mesa :" . $_SESSION['primera']["color"] . " " . $_SESSION['primera']["valor"] . "</p>";
+        if($_SESSION['comienzo']==false){
+            $cartaJuega = $_GET['manoJug'];
+            $mesa = "<p id='mesa'>Mesa :" . $cartaJuega . "</p>";
+        }
+        $_SESSION['comienzo'] = false;
     }
     
-    if(isset($_GET["pasar"])){
+    if(isset($_GET["robar"])){
         $ultima = array_pop($_SESSION['baraja']);
         array_push($_SESSION['mano' . $_SESSION['jugando']], $ultima);
-        
-        $_SESSION['jugando']++;
-       
-        if($_SESSION['jugando']>$numeroJug){
-            $_SESSION['jugando'] = 1;
-        }
 
         echo "<br>" . $_SESSION['jugador' . $_SESSION['jugando']] . "<br>";
-        echo "<select id='jugar'>";
+        echo "<select name='manoJug'>";
         foreach($_SESSION['mano' . $_SESSION['jugando']] as $key => $value){
             echo "<option value='". $value["color"] . "/" . $value["valor"] . "'>" . $value["color"] . "/" . $value["valor"] . "</option> ";
         }
         echo"</select>";
-        $mesa = "<p id='mesa'>Mesa :" . $_SESSION['primera']["color"] . " " . $_SESSION['primera']["valor"] . "</p>";
     }
 
     echo "<input type='submit' name='jugarCarta' value='Jugar'/>";
-    echo "<input type='submit' name='pasar' value='Pasar'/>";
+    echo "<input type='submit' name='robar' value='Robar'/>";
     echo $mesa;
 
-    echo "<p id='moton'> Quedan: " . count($_SESSION['baraja']) . " cartas</p>";
+    echo "<p id='moton'> Quedan: " . (count($_SESSION['baraja'])-1) . " cartas</p>";
+    
     ?>
     </form>
 </body>
