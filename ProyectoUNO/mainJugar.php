@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="#">
 </head>
 <body>
-    <form id="fJugar" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET">
+    <form id="fJugar" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
     <?php
     session_start();
     //Llamamos a la clase jugador con nombre y mano de cartas
@@ -70,27 +70,35 @@
     
     $ganador=0;
     
-    if(isset($_GET["jugarCarta"])){
-       if($_SESSION['comienzo']==false){
-            $cartaJuega = $_GET['manoJug'];
-            $mesa = "<p id='mesa'>Mesa :" . $cartaJuega . "</p>";
-            
-            foreach($_SESSION['mano' . ($_SESSION['jugando'])] as $key => $value){
-                $compara = $value["color"] . "/" . $value["valor"];
-                if($compara === $cartaJuega){
-                    unset($_SESSION['mano' . ($_SESSION['jugando'])][$key]);
-                }
+    if(isset($_POST["jugarCarta"])){
+        $valoresMesa = explode("/", $_SESSION['cartaJuega']);
+        $valoresMano = explode("/", $_POST['manoJug']);
+        echo $_SESSION['cartaJuega'];
+        if($_SESSION['comienzo']==false){
+            if($valoresMano[0]===$valoresMesa[0] || $valoresMano[1]===$valoresMesa[1]){
+                
+                 $_SESSION['cartaJuega'] = $_POST['manoJug'];
+                 $mesa = "<p id='mesa'>Mesa :" . $_SESSION['cartaJuega'] . "</p>";
+
+                 foreach($_SESSION['mano' . ($_SESSION['jugando'])] as $key => $value){
+                     $compara = $value["color"] . "/" . $value["valor"];
+                     if($compara === $_SESSION['cartaJuega']){
+                         unset($_SESSION['mano' . ($_SESSION['jugando'])][$key]);
+                     }
+                 }
             }
+            $_SESSION['jugando']++;
+
+            if($_SESSION['jugando']>$numeroJug){
+             $_SESSION['jugando'] = 1;
+             }
         }
-       $_SESSION['jugando']++;
-       
-       if($_SESSION['jugando']>$numeroJug){
-        $_SESSION['jugando'] = 1;
+        if($_SESSION['comienzo']==true){
+            $_SESSION['jugando']++;
         }
-       
-       echo "<br>" . $_SESSION['jugador' . $_SESSION['jugando']] . "<br>";
-       echo "<select name='manoJug'>";
-       foreach($_SESSION['mano' . $_SESSION['jugando']] as $key => $value){
+        echo "<br>" . $_SESSION['jugador' . $_SESSION['jugando']] . "<br>";
+        echo "<select name='manoJug'>";
+        foreach($_SESSION['mano' . $_SESSION['jugando']] as $key => $value){
             echo "<option value='". $value["color"] . "/" . $value["valor"] . "'>" . $value["color"] . "/" . $value["valor"] . "</option> ";
         }
         echo"</select>";
@@ -98,7 +106,7 @@
         $_SESSION['comienzo'] = false;
     }
     
-    if(isset($_GET["robar"])){
+    if(isset($_POST["robar"])){
         $ultima = array_pop($_SESSION['baraja']);
         array_push($_SESSION['mano' . $_SESSION['jugando']], $ultima);
 
