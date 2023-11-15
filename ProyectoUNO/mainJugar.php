@@ -71,6 +71,17 @@
     $ganador=0;
     
     if(isset($_GET["jugarCarta"])){
+       if($_SESSION['comienzo']==false){
+            $cartaJuega = $_GET['manoJug'];
+            $mesa = "<p id='mesa'>Mesa :" . $cartaJuega . "</p>";
+            
+            foreach($_SESSION['mano' . ($_SESSION['jugando'])] as $key => $value){
+                $compara = $value["color"] . "/" . $value["valor"];
+                if($compara === $cartaJuega){
+                    unset($_SESSION['mano' . ($_SESSION['jugando'])][$key]);
+                }
+            }
+        }
        $_SESSION['jugando']++;
        
        if($_SESSION['jugando']>$numeroJug){
@@ -83,19 +94,7 @@
             echo "<option value='". $value["color"] . "/" . $value["valor"] . "'>" . $value["color"] . "/" . $value["valor"] . "</option> ";
         }
         echo"</select>";
-        if($_SESSION['comienzo']==false){
-            $cartaJuega = $_GET['manoJug'];
-            $mesa = "<p id='mesa'>Mesa :" . $cartaJuega . "</p>";
-            
-            foreach($_SESSION['mano' . ($_SESSION['jugando'])] as $key => $value){
-                $compara = $value["color"] . "/" . $value["valor"];
-                echo $compara;
-                echo "<br>" . $cartaJuega;
-                if($compara === $cartaJuega){
-                    
-                }
-            }
-        }
+        
         $_SESSION['comienzo'] = false;
     }
     
