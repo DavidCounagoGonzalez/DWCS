@@ -65,15 +65,21 @@
     $_SESSION['nuevo'] = false;
 
     
-    
-    $mesa = "<p id='mesa'>Mesa :" . ($_SESSION['primera'])["color"] . " " . ($_SESSION['primera'])["valor"] . "</p>";
+    if($_SESSION['comienzo'] == true){
+        $mesa = "<p id='mesa'>Mesa :" . ($_SESSION['primera'])["color"] . " " . ($_SESSION['primera'])["valor"] . "</p>";
+        $_SESSION['cartaJuega'] = $_SESSION['primera']["color"] . "/" . $_SESSION['primera']["valor"];
+    }else{
+        $mesa = "<p id='mesa'>Mesa :" . $_SESSION['cartaJuega'] . "</p>";
+    }
     
     $ganador=0;
     
     if(isset($_POST["jugarCarta"])){
         $valoresMesa = explode("/", $_SESSION['cartaJuega']);
+        if(isset($_POST['manoJug'])){
         $valoresMano = explode("/", $_POST['manoJug']);
-        echo $_SESSION['cartaJuega'];
+        }
+
         if($_SESSION['comienzo']==false){
             if($valoresMano[0]===$valoresMesa[0] || $valoresMano[1]===$valoresMesa[1]){
                 
@@ -86,12 +92,13 @@
                          unset($_SESSION['mano' . ($_SESSION['jugando'])][$key]);
                      }
                  }
+            
+                $_SESSION['jugando']++;
+            
+                if($_SESSION['jugando']>$numeroJug){
+                    $_SESSION['jugando'] = 1;
+                }
             }
-            $_SESSION['jugando']++;
-
-            if($_SESSION['jugando']>$numeroJug){
-             $_SESSION['jugando'] = 1;
-             }
         }
         if($_SESSION['comienzo']==true){
             $_SESSION['jugando']++;
