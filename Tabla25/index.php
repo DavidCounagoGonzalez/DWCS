@@ -15,7 +15,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
             <input type="number" id="numInp" name="numInp">
             <input type="submit" name="crear" value="Crear">
         </form>
-        <table style='border:1px solid black'>
+        <table style='border:1px solid black; margin: 10px'>
         <?php
         session_start();
         
@@ -26,7 +26,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
                     for($j=0; $j<5; $j++){
                         $resultado = $_POST['numInp']*$multi;
                         $caja = $_POST['numInp'] . " x " . $multi . " = " . $resultado;
-                        echo "<td style='border:1px solid black'>".$caja."</td>"; 
+                        echo "<td style='border:1px solid black; padding:5px'>".$caja."</td>"; 
                         $multi++;
                     }
                     echo "</tr>";
