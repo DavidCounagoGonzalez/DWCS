@@ -27,7 +27,7 @@
             }
         }
         
-        echo "<p> El salario de " . $_SESSION['nombre'] . " " . $_SESSION['apellido'] . " es de " . round($salario, 2) . "€";
+        echo "<p> El salario de " . $_SESSION['nombre'] . " " . $_SESSION['apellido'] . " es de " . round($salario, 2) . "€</p>";
         ?>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
             <input type="submit" id="volver" name="volver" value="Volver">

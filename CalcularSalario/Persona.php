@@ -64,7 +64,8 @@ class Persona {
             }
         }
         
-        echo "<p> El salario de " . $persona->getNombre() . " " . $persona->getApellido() . " es de " . round($salario, 2) . "€";
+        echo "<p> El salario de " . $persona->getNombre() . " " . $persona->getApellido() . " es de " . round($salario, 2) . "€</p>";
+        return $salario;
     }   
 }
 
