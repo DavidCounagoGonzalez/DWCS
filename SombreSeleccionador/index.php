@@ -46,9 +46,8 @@
                 $archivo = fopen("Registro.txt", "w+") or die("No se puede abrir");
                 
                 if(empty($_SESSION['nombre'])){
-                    $contenido = fread($archivo);
+                    $contenido = fread($archivo, filesize("Registro.txt"));
                     $_SESSION['nombre'] = $contenido;
-                }else{
                     fwrite($archivo, "");
                 }
                 if(empty($_POST['preg1']) || empty($_POST['preg2']) || empty($_POST['preg3'])){
@@ -59,7 +58,7 @@
                     $suma = $_POST['preg1'] + $_POST['preg2'] + $_POST['preg3'];
                    
                     switch ($suma){
-                        case $suma<4: 
+                        case $suma<5: 
                             $cadena = $_SESSION['nombre'] . " , eres Kirby";
                             echo $cadena;
                             echo "<br>";
@@ -67,7 +66,7 @@
                             fwrite($archivo, $cadena);
                             break;
                         
-                        case $suma>6:
+                        case $suma>7:
                             $cadena = $_SESSION['nombre'] . " ,  eres EL Merequetengue";
                             echo $cadena;
                             echo "<br>";
