@@ -1,0 +1,35 @@
+{
+    "peliculas": [
+      {
+        "nombre": "El padrino",
+        "año": "1972",
+        "Nota": 9
+       
+      },
+      {
+        "nombre": "Doce hombres sin piedad",
+        "año": "1957",
+        "Nota": 8
+       
+      },
+      {
+        "nombre": "El señor de los aniños, el retorno del rey",
+        "año": "2003",
+        "Nota": 8
+       
+      },
+      {
+        "nombre": "Los asesinatos de la luna",
+        "año": "2023",
+        "Nota": 7
+       
+      },
+      {
+        "nombre": "Saw X",
+        "año": "2023",
+        "Nota": 6
+       
+      }     
+    
+    ]
+}
